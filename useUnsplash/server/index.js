@@ -25,6 +25,7 @@ const limiter = new RateLimit({
 app.get('/photos', limiter, (req, res) => {
   console.log("Request Made: ", req.query)
   const { query, page, size } = req.query
+  console.log(query, page, size)
   return unsplash.search.photos(query, page, size)
     .then(toJson)
     .then(json => res.status(200).json(json))
