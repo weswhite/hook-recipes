@@ -23,18 +23,12 @@ function App() {
     setQuery(e.target.value)
   }
 
-  // Create array of column heights (start at 0)
   let columnHeights = new Array(columnCount).fill(0);
-
-  // Create array of arrays that will hold each column's items
   let columns = new Array(columnCount).fill().map(() => []);
 
   photos.forEach(item => {
-    // Get index of shortest column
     const shortColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
-    // Add item
     columns[shortColumnIndex].push(item);
-    // Update height
     columnHeights[shortColumnIndex] += item.height;
   });
 
@@ -60,10 +54,8 @@ function App() {
   return (
     <>
       <div className="navbar">
+        <input type="text" onChange={updateQuery} value={query}></input>
         <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
-      </div>
-      <div className="navbar">
-        <input type="text" onChange={updateQuery}></input>
       </div>
       {photos ? 
         <div className="columns is-mobile">
@@ -86,13 +78,10 @@ function App() {
     </>
   )
 }
-
 App.propTypes = {
 
 }
-
 export default App
-
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App/>, rootElement)
 
